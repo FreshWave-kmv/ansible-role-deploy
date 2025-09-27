@@ -1,0 +1,50 @@
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:latest
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - proxy-network
+
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion:latest
+    container_name: nginx-proxy-acme
+    restart: unless-stopped
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      DEFAULT_EMAIL: "shipilovk04@gmail.com"
+    networks:
+      - proxy-network
+
+  app:
+    image: puck3/freshwave:latest
+    container_name: app
+    restart: unless-stopped
+    environment:
+      VIRTUAL_HOST: freshwave-kmv.online
+      LETSENCRYPT_HOST: freshwave-kmv.online
+    expose:
+      - "3000"
+    networks:
+      - proxy-network
+
+volumes:
+  certs: {}
+  html: {}
+  acme: {}
+
+networks:
+  proxy-network: {}
