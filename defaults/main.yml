@@ -19,3 +19,5 @@ image:
 
 hostname: "freshwave-kmv.online"
 email: "shipilovk04@gmail.com"
+
+docker_compose_dir: "/opt/freshwave"

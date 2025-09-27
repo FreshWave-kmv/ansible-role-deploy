@@ -1,3 +1,21 @@
-#SPDX-License-Identifier: MIT-0
 ---
 # tasks file for ansible-role-deploy
+- name: Ensure project directory exists
+  ansible.builtin.file:
+    path: "{{ docker_compose_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Deploy .env file
+  ansible.builtin.template:
+    src: env.j2
+    dest: "{{ docker_compose_dir }}/.env"
+    mode: "0600"
+  notify: Restart services
+
+- name: Deploy docker-compose.yml file
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker_compose_dir }}/docker-compose.yml"
+    mode: "0644"
+  notify: Restart services
