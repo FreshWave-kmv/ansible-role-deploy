@@ -1,6 +1,6 @@
-#SPDX-License-Identifier: MIT-0
 ---
-- hosts: localhost
-  remote_user: root
+- name: Test playbook for ansible-role-deploy
+  hosts: localhost
+  become: true
   roles:
-    - ansible-role-deploy
+    - role: freshwave_kmv.docker_compose_deploy
