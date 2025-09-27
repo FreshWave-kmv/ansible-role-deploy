@@ -1,38 +1,67 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Ansible-роль для деплоя веб-приложения с помощью Docker Compose
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Docker, Docker Compose
 
 Role Variables
 --------------
+env - переменные окружения для сервиса (пока фиксированные).
+```yaml
+env:
+  site_url: "https://freshwave-kmv.ru"
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+  tg_bot_token: ""
+  tg_chat_id: ""
 
-Dependencies
-------------
+  phone_number: "+79966309098"
+  tg_channel: "https://t.me/FreshWave26"
+  vk_public: "https://vk.com/freshwavekmv"
+  ig_profile: "https://instagram.com/dekabrist.ch"
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+  folder_id: ""
+  google_creds: "{}"
+```
+
+image - информация об образе и теге сервиса.
+```yaml
+image:
+  name: "puck3/freshwave"
+  tag: "latest"
+```
+
+hostname - доменное имя.
+```yaml
+hostname: "freshwave-kmv.online"
+```
+
+email - адрес электронной почты.
+```yaml
+email: "shipilovk04@gmail.com"
+```
+
+docker_comopse_dir - директория, в которой будут находиться файлы docker-compose.yml и .env.
+```yaml
+docker_compose_dir: "/opt/freshwave"
+```
 
 Example Playbook
 ----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+---
+- hosts: servers
+  become: true
+  roles:
+      - role: freshwave_kmv.docker_compose_deploy
+        hostname: "example.com"
+        email: "mail@example.com"
+```
 
 License
 -------
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+MIT
