@@ -1,3 +1,14 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# defaults file for ansible-role-deploy
+env:
+  site_url: "https://freshwave-kmv.ru"
+
+  tg_bot_token: ""
+  tg_chat_id: ""
+
+  phone_number: "+79966309098"
+  tg_channel: "https://t.me/FreshWave26"
+  vk_public: "https://vk.com/freshwavekmv"
+  ig_profile: "https://instagram.com/dekabrist.ch"
+
+  folder_id: ""
+  google_creds: "{}"
