@@ -12,3 +12,10 @@ env:
 
   folder_id: ""
   google_creds: "{}"
+
+image:
+  name: "puck3/freshwave"
+  tag: "latest"
+
+hostname: "freshwave-kmv.online"
+email: "shipilovk04@gmail.com"
