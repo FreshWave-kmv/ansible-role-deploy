@@ -1,6 +1,6 @@
 ---
 env:
-  site_url: "https://freshwave-kmv.ru"
+  site_url: "https://freshwave-kmv.online"
 
   tg_bot_token: ""
   tg_chat_id: ""
