@@ -33,13 +33,13 @@ services:
     image: {{ image.name | default('puck3/freshwave') }}:{{ image.tag | default('latest') }}
     container_name: app
     restart: unless-stopped
-    env_file:
-      - .env
     environment:
       VIRTUAL_HOST: {{ hostname | default('freshwave-kmv.online') }}
       LETSENCRYPT_HOST: {{ hostname | default('freshwave-kmv.online') }}
     networks:
       - proxy-network
+    volumes:
+      - .env:/app/.env.local:ro
 
 volumes:
   certs: {}
