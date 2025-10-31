@@ -25,19 +25,19 @@ services:
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
-      DEFAULT_EMAIL: "{{ email }}"
+      DEFAULT_EMAIL: "{{ email | default('shipilovk04@gmail.com') }}"
     networks:
       - proxy-network
 
   app:
-    image: {{ image.name }}:{{ image.tag }}
+    image: {{ image.name | default('puck3/freshwave') }}:{{ image.tag | default('latest') }}
     container_name: app
     restart: unless-stopped
     env_file:
       - .env
     environment:
-      VIRTUAL_HOST: {{ hostname }}
-      LETSENCRYPT_HOST: {{ hostname }}
+      VIRTUAL_HOST: {{ hostname | default('freshwave-kmv.online') }}
+      LETSENCRYPT_HOST: {{ hostname | default('freshwave-kmv.online') }}
     networks:
       - proxy-network
 
