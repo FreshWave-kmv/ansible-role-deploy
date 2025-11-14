@@ -25,6 +25,7 @@ services:
       - acme:/etc/acme.sh
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
+      NGINX_PROXY_CONTAINER: nginx-proxy
       DEFAULT_EMAIL: "{{ email | default('shipilovk04@gmail.com') }}"
     networks:
       - proxy-network

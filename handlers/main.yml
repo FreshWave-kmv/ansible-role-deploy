@@ -2,7 +2,9 @@
 - name: Restart services
   community.docker.docker_compose_v2:
     project_src: "{{ docker_compose_dir }}"
-    state: restarted
+    state: present
+    recreate: "always"
+    pull: "always"
   register: restart_result
 
 - name: Show restart results
