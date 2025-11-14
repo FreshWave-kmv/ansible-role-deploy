@@ -37,6 +37,8 @@ services:
     environment:
       VIRTUAL_HOST: {{ hostname | default('freshwave-kmv.online') }}
       LETSENCRYPT_HOST: {{ hostname | default('freshwave-kmv.online') }}
+    env_file:
+      - .env
     networks:
       - proxy-network
     volumes:
